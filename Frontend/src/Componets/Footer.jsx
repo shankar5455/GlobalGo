@@ -1,3 +1,4 @@
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa6"
 import { Link } from "react-router-dom"
 
 const Footer = () => {
@@ -52,17 +53,14 @@ const Footer = () => {
           <div className="footer-section">
             <h3>Connect With Us</h3>
             <div className="social-links">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                Facebook
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                Twitter
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="fa-5x">
+                <FaFacebook size={25}/>
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                Instagram
+                <FaInstagram size={25}/>
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                LinkedIn
+                <FaLinkedin size={25}/>
               </a>
             </div>
           </div>

@@ -43,7 +43,7 @@ const Login = () => {
         localStorage.setItem("isLoggedIn", "true")
         localStorage.setItem("isAdmin", "false")
         localStorage.setItem("username", response.data.username) // Store username here
-        navigate("/")
+        navigate("/dashboard")
       } else {
         setError("Invalid email or password")
         return

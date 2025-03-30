@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true")
-  const [username, setUsername] = useState(localStorage.getItem("username") || "")
+  const [username, setUsername] = useState(localStorage.getItem("username") || "user")
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
 
