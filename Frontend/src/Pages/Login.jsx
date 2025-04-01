@@ -4,7 +4,7 @@ import axios from "axios"
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "", // Corrected key to email
     password: "",
   })
   const [error, setError] = useState("")
@@ -35,22 +35,22 @@ const Login = () => {
 
       const data = response.data
 
-      if (data === "admin") {
+      if (data.status === "success") {
         localStorage.setItem("isLoggedIn", "true")
-        localStorage.setItem("isAdmin", "true")
-        navigate("/admin")
-      } else if (data === "user") {
-        localStorage.setItem("isLoggedIn", "true")
-        localStorage.setItem("isAdmin", "false")
-        localStorage.setItem("username", response.data.username) // Store username here
-        navigate("/dashboard")
+        localStorage.setItem("username", data.username) // ✅ Store username correctly
+        localStorage.setItem("isAdmin", data.role === "ADMIN" ? "true" : "false")
+
+        if (data.role === "ADMIN") {
+          navigate("/admin")
+        } else {
+          navigate("/dashboard")
+        }
+
+        // ✅ Refresh the page after login
+        window.location.reload()
       } else {
         setError("Invalid email or password")
-        return
       }
-
-      // ✅ Refresh the page after login
-      window.location.reload()
     } catch (error) {
       setError("Error logging in. Please try again.")
       console.error("Login error:", error)

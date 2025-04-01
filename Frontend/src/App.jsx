@@ -13,6 +13,7 @@ import Flights from "./Pages/Flights"
 import Hotels from "./Pages/Hotels"
 import Cabs from "./Pages/Cabs"
 import Restaurant from "./Pages/Restaurant"
+import ProtectedRoute from "./Componets/ProtectedRoute"
 
 
 function App() {
@@ -25,13 +26,12 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<ProtectedRoute> <AdminDashboard /> </ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
             <Route path="/flights" element={<Flights />} />
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/restaurants" element={<Restaurant />} />
             <Route path="/cabs" element={<Cabs />} />
-
           </Routes>
         </main>
         <Footer />
