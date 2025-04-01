@@ -20,7 +20,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable()) // Disable CSRF (for development)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/api/auth/login", 
+                    "/api/auth/login",
                     "/api/auth/register", 
                     "/api/auth/admin/register" // Allow admin registration endpoint
                 ).permitAll() // Publicly accessible routes

@@ -2,17 +2,18 @@
 
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import "../style/Header.css"
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true")
   const [username, setUsername] = useState(localStorage.getItem("username") || "User")
-  const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") === "true") // ✅ Correctly parsing as boolean
+  const [isAdmin, setIsAdmin] = useState(localStorage.getItem("isAdmin") === "true")
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username")
-    const storedIsAdmin = localStorage.getItem("isAdmin") === "true" // ✅ Parse correctly
+    const storedIsAdmin = localStorage.getItem("isAdmin") === "true"
     setUsername(storedUsername || "User")
     setIsAdmin(storedIsAdmin)
     setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true")
@@ -38,7 +39,7 @@ const Header = () => {
           <ul className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
             {isLoggedIn ? (
               <>
-                {/* ✅ Admin Header */}
+                {/* Admin Header */}
                 {isAdmin ? (
                   <>
                     <li>
@@ -58,7 +59,7 @@ const Header = () => {
                   </>
                 ) : (
                   <>
-                    {/* ✅ User Header */}
+                    {/* User Header */}
                     <li>
                       <Link to="/flights">Flights</Link>
                     </li>
@@ -79,7 +80,6 @@ const Header = () => {
                         Welcome, <strong>{username}</strong> 👋
                       </Link>
                     </li>
-
                   </>
                 )}
                 <li>
@@ -117,69 +117,106 @@ const Header = () => {
             )}
           </ul>
 
-          {/* Mobile Menu */}
-          <div className="mobile-menu">
-            <button onClick={() => setMenuOpen(!menuOpen)}>
-              <i className={`fas fa-${menuOpen ? "times" : "bars"}`}></i>
-            </button>
-          </div>
-
-          {menuOpen && (
-            <div className="mobile-nav">
-              {isLoggedIn ? (
-                <>
-                  {isAdmin ? (
-                    <>
-                      <Link to="/admin-dashboard" onClick={() => setMenuOpen(false)}>
-                        Admin Dashboard
-                      </Link>
-                      <Link to="/manage-users" onClick={() => setMenuOpen(false)}>
-                        Manage Users
-                      </Link>
-                      <Link to="/reports" onClick={() => setMenuOpen(false)}>
-                        Reports
-                      </Link>
-                      <Link to="/profile" onClick={() => setMenuOpen(false)}>
-                        Welcome, {username} 👑
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <Link to="/flights" onClick={() => setMenuOpen(false)}>
-                        Flights
-                      </Link>
-                      <Link to="/hotels" onClick={() => setMenuOpen(false)}>
-                        Hotels
-                      </Link>
-                      <Link to="/cabs" onClick={() => setMenuOpen(false)}>
-                        Cabs
-                      </Link>
-                      <Link to="/restaurants" onClick={() => setMenuOpen(false)}>
-                        Restaurants
-                      </Link>
-                      <Link to="/history" onClick={() => setMenuOpen(false)}>
-                        My Bookings
-                      </Link>
-                      <Link to="/profile" onClick={() => setMenuOpen(false)}>
-                        Welcome, {username} 👋
-                      </Link>
-                    </>
-                  )}
-                  <button onClick={handleLogout}>Logout</button>
-                </>
+          {/* Mobile Menu Button */}
+          <div className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {menuOpen ? (
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               ) : (
-                <>
-                  <Link to="/login" onClick={() => setMenuOpen(false)}>
-                    Login
-                  </Link>
-                  <Link to="/register" onClick={() => setMenuOpen(false)}>
-                    Register
-                  </Link>
-                </>
+                <path
+                  d="M3 12H21M3 6H21M3 18H21"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               )}
-            </div>
-          )}
+            </svg>
+          </div>
         </nav>
+
+        {/* Mobile Menu Dropdown */}
+        {menuOpen && (
+          <div className="mobile-nav">
+            {isLoggedIn ? (
+              <>
+                {isAdmin ? (
+                  <>
+                    <Link to="/admin-dashboard" onClick={() => setMenuOpen(false)}>
+                      Admin Dashboard
+                    </Link>
+                    <Link to="/manage-users" onClick={() => setMenuOpen(false)}>
+                      Manage Users
+                    </Link>
+                    <Link to="/reports" onClick={() => setMenuOpen(false)}>
+                      Reports
+                    </Link>
+                    <Link to="/profile" onClick={() => setMenuOpen(false)}>
+                      Welcome, {username} 👑
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/flights" onClick={() => setMenuOpen(false)}>
+                      Flights
+                    </Link>
+                    <Link to="/hotels" onClick={() => setMenuOpen(false)}>
+                      Hotels
+                    </Link>
+                    <Link to="/cabs" onClick={() => setMenuOpen(false)}>
+                      Cabs
+                    </Link>
+                    <Link to="/restaurants" onClick={() => setMenuOpen(false)}>
+                      Restaurants
+                    </Link>
+                    <Link to="/history" onClick={() => setMenuOpen(false)}>
+                      My Bookings
+                    </Link>
+                    <Link to="/profile" onClick={() => setMenuOpen(false)}>
+                      Welcome, {username} 👋
+                    </Link>
+                  </>
+                )}
+                <button className="btn btn-outline" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/flights" onClick={() => setMenuOpen(false)}>
+                  Flights
+                </Link>
+                <Link to="/hotels" onClick={() => setMenuOpen(false)}>
+                  Hotels
+                </Link>
+                <Link to="/cabs" onClick={() => setMenuOpen(false)}>
+                  Cabs
+                </Link>
+                <Link to="/restaurants" onClick={() => setMenuOpen(false)}>
+                  Restaurants
+                </Link>
+                <Link to="/login" className="btn btn-outline" onClick={() => setMenuOpen(false)}>
+                  Login
+                </Link>
+                <Link to="/register" className="btn btn-primary" onClick={() => setMenuOpen(false)}>
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </header>
   )
