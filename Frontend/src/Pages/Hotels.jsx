@@ -212,7 +212,7 @@ const Hotels = () => {
               <div className="filter-options">
                 <div className="flex gap-10">
                   <div>
-                    <label>Min $</label>
+                    <label>Min ₹</label>
                     <input
                       type="number"
                       className="form-control"
@@ -223,7 +223,7 @@ const Hotels = () => {
                     />
                   </div>
                   <div>
-                    <label>Max $</label>
+                    <label>Max ₹</label>
                     <input
                       type="number"
                       className="form-control"
@@ -299,7 +299,7 @@ const Hotels = () => {
                         <div className="flex justify-between align-center" style={{ marginTop: "10px" }}>
                           <div>
                             <div>
-                              <strong>Price:</strong> <span className="price">${hotel.price}</span> per night
+                              <strong>Price:</strong> <span className="price">₹{hotel.price}</span> per night
                             </div>
                             <div>
                               <strong>Available Rooms:</strong> {hotel.availableRooms}
