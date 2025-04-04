@@ -200,14 +200,14 @@ const Flights = () => {
                 <input
                   type="range"
                   min="0"
-                  max="1000"
+                  max="10000"
                   step="50"
                   name="maxPrice"
                   value={filters.maxPrice}
                   onChange={handleFilterChange}
                   className="range-slider"
                 />
-                <div>Max: ${filters.maxPrice}</div>
+                <div>Max: ₹{filters.maxPrice}</div>
               </div>
             </div>
 
@@ -241,7 +241,7 @@ const Flights = () => {
                         <h3 className="card-title">
                           {flight.airline} - {flight.flightNumber}
                         </h3>
-                        <span className="price">${flight.price}</span>
+                        <span className="price">₹{flight.price}</span>
                       </div>
 
                       <div className="flex justify-between my-2">

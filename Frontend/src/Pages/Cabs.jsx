@@ -205,14 +205,14 @@ const Cabs = () => {
                 <input
                   type="range"
                   min="0"
-                  max="100"
+                  max="10000"
                   step="5"
                   name="maxPrice"
-                  value={filters.maxPrice}
+                  value= {filters.maxPrice}
                   onChange={handleFilterChange}
                   className="range-slider"
                 />
-                <div>Max: ${filters.maxPrice}</div>
+                <div>Max: ₹{filters.maxPrice}</div>
               </div>
             </div>
 
@@ -261,7 +261,7 @@ const Cabs = () => {
                       </div>
 
                       <div className="flex justify-between align-center">
-                        <span className="price">${cab.price} per hour</span>
+                        <span className="price">₹{cab.price} per hour</span>
                         <button className="btn btn-primary" onClick={() => handleBookCab(cab.id)}>
                           Book Now
                         </button>

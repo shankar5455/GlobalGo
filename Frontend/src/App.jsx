@@ -32,6 +32,7 @@ function App() {
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/restaurants" element={<Restaurant />} />
             <Route path="/cabs" element={<Cabs />} />
+            
           </Routes>
         </main>
         <Footer />

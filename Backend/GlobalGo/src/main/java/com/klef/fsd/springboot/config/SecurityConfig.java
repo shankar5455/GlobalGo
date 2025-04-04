@@ -22,7 +22,8 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/api/auth/login",
                     "/api/auth/register", 
-                    "/api/auth/admin/register" // Allow admin registration endpoint
+                    "/api/auth/admin/register", // Allow admin registration endpoint
+                    "/api/flights/**" // Allow public access to flight APIs
                 ).permitAll() // Publicly accessible routes
                 .anyRequest().authenticated()); // Protect all other endpoints
 
