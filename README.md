@@ -67,8 +67,8 @@ We’d love to grow the project with your help.
 ## Acknowledgements
 
 👥 **Contributors**  
-- [Your Name](https://github.com/your-github-profile)  
-- [Teammate Name](https://github.com/their-profile)  
+- Mohan (https://github.com/Mohan-077)  
+- Avinash (https://github.com/Avinash-006) 
 
 💻 **Built With**  
 - [React](https://reactjs.org/)  
