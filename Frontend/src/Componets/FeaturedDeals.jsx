@@ -3,27 +3,43 @@ import { Link } from "react-router-dom";
 const deals = [
   {
     id: 1,
-    title: "Paris Weekend Getaway",
-    description: "Experience the city of love with our special weekend package",
-    price: 499,
-    image: "https://hldak.mmtcdn.com/prod-s3-hld-hpcmsadmin/holidays/images/cities/734/Em11.JPG",
-    type: "flight",
+    title: "Goa Beach Escape",
+    description: "Soak in the sun and enjoy the vibrant nightlife of Goa",
+    price: 5999,
+    image: "https://www.villacalangute.com/blog/escape-to-paradise-discover-the-best-isolated-beaches/escape-to-paradise-discover-the-best-isolated-beaches-large.jpg",
+    type: "package",
   },
   {
     id: 2,
-    title: "Luxury Beach Resort",
-    description: "All-inclusive beach resort experience in Bali",
-    price: 899,
-    image: "https://imageio.forbes.com/specials-images/imageserve/648f06a6152abcf5ef5e44a9/e125175d2a6f8fed0c71b983c4d1368d/960x0.jpg?format=jpg&width=960",
-    type: "hotel",
+    title: "Kashmir Paradise Tour",
+    description: "Explore the heaven on earth with our curated Kashmir tour",
+    price: 11499,
+    image: "https://5.imimg.com/data5/IL/SA/IS/GLADMIN-64221091/kashmir-paradise-tour-500x500.jpg",
+    type: "package",
   },
   {
     id: 3,
-    title: "Mountain Retreat",
-    description: "Explore the Swiss Alps with this exclusive package",
-    price: 699,
-    image: "https://images.stockcake.com/public/0/3/d/03d47a12-c670-4a59-aadf-a65dc63d5adb_large/riverside-mountain-retreat-stockcake.jpg",
+    title: "Taj Mahal Day Trip",
+    description: "Witness the grandeur of the Taj Mahal with a guided day trip",
+    price: 1999,
+    image: "https://images.unsplash.com/photo-1548013146-72479768bada",
+    type: "tour",
+  },
+  {
+    id: 4,
+    title: "Kerala Backwater Cruise",
+    description: "Relax on a luxury houseboat through the serene backwaters of Alleppey",
+    price: 8499,
+    image: "https://www.keralaholidays.com/uploads/tourpackages-gallery/thumb/BackwaterCruise-HouseboatStay.jpg",
     type: "package",
+  },
+  {
+    id: 5,
+    title: "Rajasthan Desert Safari",
+    description: "Camel rides and desert camping under the stars in Jaisalmer",
+    price: 7499,
+    image: "https://www.myrajasthantrip.com/wp-content/uploads/2023/05/camel-safari-jaisalmer.jpg",
+    type: "adventure",
   },
 ];
 
@@ -32,8 +48,8 @@ const FeaturedDeals = () => {
     <section className="section">
       <div className="container">
         <div className="section-title">
-          <h2>Featured Deals</h2>
-          <p>Explore our handpicked deals for unforgettable experiences</p>
+          <h2>Featured Indian Travel Deals</h2>
+          <p>Discover unforgettable experiences across India's top destinations</p>
         </div>
 
         <div className="grid">
@@ -48,7 +64,7 @@ const FeaturedDeals = () => {
                 <h3 className="card-title">{deal.title}</h3>
                 <p className="card-text">{deal.description}</p>
                 <div className="flex justify-between align-center">
-                  <span className="price">${deal.price}</span>
+                  <span className="price">₹{deal.price}</span>
                   <Link
                     to={`/${
                       deal.type === "flight"
@@ -57,9 +73,11 @@ const FeaturedDeals = () => {
                         ? "hotels"
                         : deal.type === "package"
                         ? "packages"
-                        : deal.type === "service"
-                        ? "services"
-                        : ""
+                        : deal.type === "adventure"
+                        ? "adventures"
+                        : deal.type === "tour"
+                        ? "tours"
+                        : "services"
                     }/${deal.id}`}
                     className="btn btn-primary"
                   >

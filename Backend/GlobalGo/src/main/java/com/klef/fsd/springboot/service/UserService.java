@@ -11,34 +11,63 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();  // For password encryption
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    // Login Method with password verification
+    // ========================
+    // LOGIN METHOD
+    // ========================
     public Optional<User> login(String email, String password) {
         Optional<User> user = userRepository.findByEmail(email);
-
-        // Check if user exists and password matches
         if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
             return user;
         }
         return Optional.empty();
     }
 
-    // Register User or Admin
+    // ========================
+    // REGISTER USER OR ADMIN
+    // ========================
     public User register(User user) {
-        // Check if the role is provided, otherwise default to "USER"
         if (user.getRole() == null || user.getRole().isEmpty()) {
             user.setRole("USER");
         }
 
-        // Encrypt the password before saving to the database
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        // Save the user (either USER or ADMIN) to the database
         return userRepository.save(user);
+    }
+
+    // ========================
+    // FIND USER BY EMAIL
+    // ========================
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    // ========================
+    // UPDATE USER DETAILS
+    // ========================
+    public User updateUser(User user) {
+        // Re-encode password if it has been changed
+        Optional<User> existingUserOpt = userRepository.findByEmail(user.getEmail());
+
+        if (existingUserOpt.isPresent()) {
+            User existingUser = existingUserOpt.get();
+
+            existingUser.setUsername(user.getUsername());
+            existingUser.setPhonenumber(user.getPhonenumber());
+
+            // Encode password only if it's different from the existing one
+            if (!passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+                existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
+
+            return userRepository.save(existingUser);
+        }
+
+        throw new RuntimeException("User not found");
     }
 }

@@ -32,19 +32,15 @@ const Header = () => {
     <header className="header">
       <div className="container">
         <nav className="navbar">
-          <Link to="/" className="logo">
-            GlobalGo
-          </Link>
-
+        <Link to={isAdmin ? "/admin" : isLoggedIn ? "/dashboard" : "/"} className="logo">
+          GlobalGo
+        </Link>
           <ul className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
             {isLoggedIn ? (
               <>
                 {/* Admin Header */}
                 {isAdmin ? (
                   <>
-                    <li>
-                      <Link to="/admin-dashboard">Admin Dashboard</Link>
-                    </li>
                     <li>
                       <Link to="/manage-users">Manage Users</Link>
                     </li>
@@ -53,7 +49,7 @@ const Header = () => {
                     </li>
                     <li>
                       <Link to="/profile" className="welcome-text">
-                        Welcome, <strong>{username}</strong> 👑
+                        Welcome, <strong>{username}</strong>
                       </Link>
                     </li>
                   </>
@@ -77,7 +73,7 @@ const Header = () => {
                     </li>
                     <li>
                       <Link to="/profile" className="welcome-text">
-                        Welcome, <strong>{username}</strong> 👋
+                        Welcome, <strong>{username}</strong>
                       </Link>
                     </li>
                   </>
@@ -164,7 +160,7 @@ const Header = () => {
                       Reports
                     </Link>
                     <Link to="/profile" onClick={() => setMenuOpen(false)}>
-                      Welcome, {username} 👑
+                      Welcome, {username}
                     </Link>
                   </>
                 ) : (
@@ -185,7 +181,7 @@ const Header = () => {
                       My Bookings
                     </Link>
                     <Link to="/profile" onClick={() => setMenuOpen(false)}>
-                      Welcome, {username} 👋
+                      Welcome, {username}
                     </Link>
                   </>
                 )}

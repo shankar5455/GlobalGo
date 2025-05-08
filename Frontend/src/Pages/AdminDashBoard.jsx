@@ -164,7 +164,7 @@ const AdminDashboard = () => {
       </section>
 
       {/* Logout Section */}
-      <section className="section text-center" style={{ backgroundColor: "#ff4d4d", color: "#fff" }}>
+      {/* <section className="section text-center" style={{ backgroundColor: "#ff4d4d", color: "#fff" }}>
         <div className="container">
           <h2>Ready to Logout?</h2>
           <p style={{ maxWidth: "600px", margin: "20px auto" }}>Ensure that you have reviewed all changes before logging out.</p>
@@ -179,7 +179,7 @@ const AdminDashboard = () => {
             Logout
           </button>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }

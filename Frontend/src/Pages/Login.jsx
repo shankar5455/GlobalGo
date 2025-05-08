@@ -4,7 +4,7 @@ import axios from "axios"
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: "", // Corrected key to email
+    email: "",
     password: "",
   })
   const [error, setError] = useState("")
@@ -12,12 +12,10 @@ const Login = () => {
 
   const { email, password } = formData
 
-  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
@@ -29,16 +27,17 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:8080/api/auth/login", {
-        email: email,
-        password: password,
+        email,
+        password,
       })
 
       const data = response.data
 
       if (data.status === "success") {
         localStorage.setItem("isLoggedIn", "true")
-        localStorage.setItem("username", data.username) // ✅ Store username correctly
+        localStorage.setItem("username", data.username)
         localStorage.setItem("isAdmin", data.role === "ADMIN" ? "true" : "false")
+        localStorage.setItem("email", email) // ✅ Set email for profile fetch
 
         if (data.role === "ADMIN") {
           navigate("/admin")
@@ -46,7 +45,6 @@ const Login = () => {
           navigate("/dashboard")
         }
 
-        // ✅ Refresh the page after login
         window.location.reload()
       } else {
         setError("Invalid email or password")

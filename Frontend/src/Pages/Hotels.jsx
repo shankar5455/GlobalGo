@@ -16,7 +16,7 @@ const Hotels = () => {
     guests: 1,
   })
   const [filters, setFilters] = useState({
-    priceRange: [0, 1000],
+    priceRange: [0, 100000],
     rating: 0,
     amenities: [],
   })
