@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.user-dashboard {
+  font-family: 'Poppins', sans-serif;
+  padding: 40px;
+  position: relative;
+  background-color: #fff;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+/* Profile Photo */
+.user-profile-photo {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fb923c;
+  box-shadow: 0 0 0 4px #fff;
+  z-index: 1;
+}
+
+.user-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Header Section */
+.user-header {
+  margin-bottom: 30px;
+}
+
+.user-header h1 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* Account Info */
+.user-account-info {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.user-info-label {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.user-info-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+}
+
+.user-checkmark {
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+/* Navigation Tabs */
+.user-main-menu {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.user-main-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.user-main-menu li {
+  font-size: 15px;
+  color: #64748b;
+  cursor: pointer;
+  padding-bottom: 5px;
+  transition: all 0.2s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.user-main-menu li:hover {
+  color: #1e293b;
+}
+
+.user-main-menu li.user-active {
+  color: #1e293b;
+  font-weight: 600;
+  border-bottom: 2px solid #1e293b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .user-dashboard {
+    padding: 20px;
+  }
+
+  .user-profile-photo {
+    width: 80px;
+    height: 80px;
+    top: 20px;
+    right: 20px;
+  }
+
+  .user-account-info {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .user-header h1 {
+    font-size: 28px;
+  }
+
+  .user-main-menu ul {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}

@@ -18,7 +18,7 @@ const Cabs = () => {
   })
   const [filters, setFilters] = useState({
     cabType: [],
-    maxPrice: 100,
+    maxPrice: 5000,
     minCapacity: 1,
   })
   const [loading, setLoading] = useState(true)

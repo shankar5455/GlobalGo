@@ -14,6 +14,7 @@ import Hotels from "./Pages/Hotels"
 import Cabs from "./Pages/Cabs"
 import Restaurant from "./Pages/Restaurant"
 import ProtectedRoute from "./Componets/ProtectedRoute"
+import Profile from "./Pages/Profile"
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
             <Route path="/hotels" element={<Hotels />} />
             <Route path="/restaurants" element={<Restaurant />} />
             <Route path="/cabs" element={<Cabs />} />
-            
+            <Route path="/profile" element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
           </Routes>
         </main>
         <Footer />
@@ -42,4 +43,3 @@ function App() {
 }
 
 export default App
-

@@ -10,14 +10,14 @@ const Flights = () => {
   const [allFlights, setAllFlights] = useState([])
   const [filteredFlights, setFilteredFlights] = useState([])
   const [searchParams, setSearchParams] = useState({
+    origin: "",
     destination: "",
     departureDate: "",
-    returnDate: "",
     passengers: 1,
   })
   const [filters, setFilters] = useState({
     airline: [],
-    maxPrice: 1000,
+    maxPrice: 10000,
     stops: "any",
   })
   const [loading, setLoading] = useState(true)
@@ -25,15 +25,16 @@ const Flights = () => {
   // Extract query parameters
   useEffect(() => {
     const params = new URLSearchParams(location.search)
+    const origin = params.get("from") || ""
     const destination = params.get("destination") || ""
     const fromDate = params.get("fromDate") || ""
     const toDate = params.get("toDate") || ""
     const travelers = params.get("travelers") || 1
 
     setSearchParams({
+      origin,
       destination,
       departureDate: fromDate,
-      returnDate: toDate,
       passengers: Number(travelers),
     })
 
@@ -49,10 +50,17 @@ const Flights = () => {
   useEffect(() => {
     let results = [...allFlights]
 
-    // Filter by destination if provided
+    // Filter by origin
+    if (searchParams.origin) {
+      results = results.filter((flight) =>
+        flight.departure.city.toLowerCase().includes(searchParams.origin.toLowerCase())
+      )
+    }
+
+    // Filter by destination
     if (searchParams.destination) {
       results = results.filter((flight) =>
-        flight.arrival.city.toLowerCase().includes(searchParams.destination.toLowerCase()),
+        flight.arrival.city.toLowerCase().includes(searchParams.destination.toLowerCase())
       )
     }
 
@@ -121,6 +129,17 @@ const Flights = () => {
           <form>
             <div className="search-content">
               <div className="search-input">
+                <label className="form-label">From</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter departure city"
+                  value={searchParams.origin}
+                  onChange={(e) => setSearchParams({ ...searchParams, origin: e.target.value })}
+                />
+              </div>
+
+              <div className="search-input">
                 <label className="form-label">Destination</label>
                 <input
                   type="text"
@@ -138,16 +157,6 @@ const Flights = () => {
                   className="form-control"
                   value={searchParams.departureDate}
                   onChange={(e) => setSearchParams({ ...searchParams, departureDate: e.target.value })}
-                />
-              </div>
-
-              <div className="search-input">
-                <label className="form-label">Return Date</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  value={searchParams.returnDate}
-                  onChange={(e) => setSearchParams({ ...searchParams, returnDate: e.target.value })}
                 />
               </div>
 
@@ -301,4 +310,3 @@ const Flights = () => {
 }
 
 export default Flights
-

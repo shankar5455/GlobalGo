@@ -1,7 +1,8 @@
 package com.klef.fsd.springboot.controller;
 
-import com.klef.fsd.springboot.modal.User;
+import com.klef.fsd.springboot.modal.User; 
 import com.klef.fsd.springboot.service.UserService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -19,43 +20,111 @@ public class AuthController {
         this.userService = userService;
     }
 
-    // Login Endpoint
+    // ========================
+    // LOGIN ENDPOINT
+    // ========================
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody User user) {
         Optional<User> loggedInUser = userService.login(user.getEmail(), user.getPassword());
 
+        Map<String, Object> response = new HashMap<>();
+
         if (loggedInUser.isPresent()) {
             User u = loggedInUser.get();
-
-            // Create a JSON response with username and role
-            Map<String, Object> response = new HashMap<>();
             response.put("username", u.getUsername());
+            response.put("email", u.getEmail());
             response.put("role", u.getRole());
             response.put("status", "success");
-
-            return response;
+        } else {
+            response.put("status", "error");
+            response.put("message", "Invalid credentials");
         }
 
-        // Return error if login fails
-        Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("status", "error");
-        errorResponse.put("message", "Invalid credentials");
-        return errorResponse;
+        return response;
     }
 
-    // Register User Endpoint (Default Role: USER)
+    // ========================
+    // REGISTER USER (DEFAULT ROLE: USER)
+    // ========================
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
-        user.setRole("USER");  // Default role is USER
+    public Map<String, String> register(@RequestBody User user) {
+        user.setRole("USER");  // Set default role as USER
         userService.register(user);
-        return "User registered successfully";
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "User registered successfully");
+
+        return response;
     }
 
-    // Register Admin Endpoint
+    // ========================
+    // REGISTER ADMIN
+    // ========================
     @PostMapping("/admin/register")
-    public String registerAdmin(@RequestBody User user) {
-        user.setRole("ADMIN");  // Enforce ADMIN role for admin registration
+    public Map<String, String> registerAdmin(@RequestBody User user) {
+        user.setRole("ADMIN");  // Forcefully set role as ADMIN
         userService.register(user);
-        return "Admin registered successfully";
+
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("message", "Admin registered successfully");
+
+        return response;
     }
+
+    // ========================
+    // GET USER BY EMAIL
+    // ========================
+    @GetMapping("/user/{email}")
+    public Map<String, Object> getUserByEmail(@PathVariable String email) {
+        Optional<User> userOpt = userService.findByEmail(email);
+
+        Map<String, Object> response = new HashMap<>();
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            response.put("username", user.getUsername());
+            response.put("email", user.getEmail());
+            response.put("role", user.getRole());
+            response.put("phonenumber", user.getPhonenumber());
+            response.put("status", "success");
+        } else {
+            response.put("status", "error");
+            response.put("message", "User not found");
+        }
+
+        return response;
+    }
+    
+ // ========================
+ // UPDATE USER DETAILS
+ // ========================
+ @PutMapping("/update")
+ public Map<String, String> updateUser(@RequestBody User updatedUser) {
+     Map<String, String> response = new HashMap<>();
+
+     Optional<User> existingUserOpt = userService.findByEmail(updatedUser.getEmail());
+
+     if (existingUserOpt.isPresent()) {
+         User existingUser = existingUserOpt.get();
+
+         // Update only allowed fields
+         existingUser.setUsername(updatedUser.getUsername());
+         existingUser.setPhonenumber(updatedUser.getPhonenumber());
+         existingUser.setPassword(updatedUser.getPassword());
+
+         userService.updateUser(existingUser);
+
+         response.put("status", "success");
+         response.put("message", "User updated successfully");
+     } else {
+         response.put("status", "error");
+         response.put("message", "User not found");
+     }
+
+     return response;
+ }
+
+ 
 }

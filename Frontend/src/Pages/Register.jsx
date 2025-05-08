@@ -9,11 +9,12 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    phonenumber: "", // added
   })
   const [errors, setErrors] = useState({})
   const navigate = useNavigate()
 
-  const { username, email, password, confirmPassword } = formData
+  const { username, email, password, confirmPassword, phonenumber } = formData
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -34,6 +35,13 @@ const Register = () => {
       newErrors.email = "Email is required"
     } else if (!/^\S+@\S+\.\S+$/.test(email)) {
       newErrors.email = "Email is invalid"
+    }
+
+    // Phone number validation
+    if (!phonenumber.trim()) {
+      newErrors.phonenumber = "Phone number is required"
+    } else if (!/^\d{10}$/.test(phonenumber)) {
+      newErrors.phonenumber = "Phone number must be 10 digits"
     }
 
     // Password validation
@@ -68,7 +76,7 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password, phonenumber }), // updated
       })
 
       if (response.ok) {
@@ -118,6 +126,19 @@ const Register = () => {
               onChange={handleChange}
             />
             {errors.email && <div className="error-message">{errors.email}</div>}
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Phone Number</label>
+            <input
+              type="text"
+              name="phonenumber"
+              className="form-control"
+              placeholder="Enter your phone number"
+              value={phonenumber}
+              onChange={handleChange}
+            />
+            {errors.phonenumber && <div className="error-message">{errors.phonenumber}</div>}
           </div>
 
           <div className="form-group">
