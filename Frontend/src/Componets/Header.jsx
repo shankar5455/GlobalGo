@@ -42,10 +42,7 @@ const Header = () => {
                 {isAdmin ? (
                   <>
                     <li>
-                      <Link to="/manage-users">Manage Users</Link>
-                    </li>
-                    <li>
-                      <Link to="/reports">Reports</Link>
+                      <Link to="/manageusers">Manage Users</Link>
                     </li>
                     <li>
                       <Link to="/profile" className="welcome-text">
@@ -153,7 +150,7 @@ const Header = () => {
                     <Link to="/admin-dashboard" onClick={() => setMenuOpen(false)}>
                       Admin Dashboard
                     </Link>
-                    <Link to="/manage-users" onClick={() => setMenuOpen(false)}>
+                    <Link to="/manageusers" onClick={() => setMenuOpen(false)}>
                       Manage Users
                     </Link>
                     <Link to="/reports" onClick={() => setMenuOpen(false)}>

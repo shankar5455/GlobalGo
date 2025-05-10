@@ -41,23 +41,7 @@ const AdminDashboard = () => {
               <div className="card-content">
                 <FaUsers size={40} style={{ marginBottom: "10px", color: "#4CAF50" }} />
                 <h3 className="card-title">Total Users</h3>
-                <p className="card-text">500+</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-content">
-                <FaTags size={40} style={{ marginBottom: "10px", color: "#2196F3" }} />
-                <h3 className="card-title">Active Deals</h3>
-                <p className="card-text">20</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-content">
-                <FaClipboardList size={40} style={{ marginBottom: "10px", color: "#FF9800" }} />
-                <h3 className="card-title">Pending Reviews</h3>
-                <p className="card-text">15</p>
+                <p className="card-text">4</p>
               </div>
             </div>
 
@@ -65,7 +49,7 @@ const AdminDashboard = () => {
               <div className="card-content">
                 <FaChartBar size={40} style={{ marginBottom: "10px", color: "#E91E63" }} />
                 <h3 className="card-title">Monthly Revenue</h3>
-                <p className="card-text">$12,000</p>
+                <p className="card-text">₹12,000</p>
               </div>
             </div>
           </div>
@@ -100,86 +84,9 @@ const AdminDashboard = () => {
                 </Link>
               </div>
             </div>
-
-            <div className="card">
-              <div className="card-content">
-                <h3 className="card-title">Review Feedback</h3>
-                <p className="card-text">Approve or reject user reviews</p>
-                <Link to="/admin/reviews" className="btn btn-outline">
-                  Review Feedback
-                </Link>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-content">
-                <h3 className="card-title">Platform Analytics</h3>
-                <p className="card-text">View detailed performance data</p>
-                <Link to="/admin/analytics" className="btn btn-outline">
-                  View Analytics
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-
-      {/* Recent Activity Section */}
-      <section className="section">
-        <div className="container">
-          <div className="section-title">
-            <h2>Recent Activity</h2>
-            <p>Monitor user actions and platform changes</p>
-          </div>
-
-          <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))" }}>
-            <div className="card">
-              <div className="card-content">
-                <p className="card-text">
-                  <strong>New User Registered:</strong> John Doe
-                </p>
-                <p style={{ fontSize: "0.9rem", color: "#777" }}>5 mins ago</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-content">
-                <p className="card-text">
-                  <strong>Deal Updated:</strong> 20% off on Hotels
-                </p>
-                <p style={{ fontSize: "0.9rem", color: "#777" }}>30 mins ago</p>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="card-content">
-                <p className="card-text">
-                  <strong>Review Approved:</strong> "Great experience!"
-                </p>
-                <p style={{ fontSize: "0.9rem", color: "#777" }}>1 hour ago</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Logout Section */}
-      {/* <section className="section text-center" style={{ backgroundColor: "#ff4d4d", color: "#fff" }}>
-        <div className="container">
-          <h2>Ready to Logout?</h2>
-          <p style={{ maxWidth: "600px", margin: "20px auto" }}>Ensure that you have reviewed all changes before logging out.</p>
-          <button
-            className="btn btn-outline"
-            onClick={() => {
-              localStorage.clear()
-              window.location.href = "/login"
-            }}
-          >
-            <FaSignOutAlt style={{ marginRight: "8px" }} />
-            Logout
-          </button>
-        </div>
-      </section> */}
     </div>
   )
 }
