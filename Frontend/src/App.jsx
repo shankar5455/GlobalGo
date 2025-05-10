@@ -15,6 +15,9 @@ import Cabs from "./Pages/Cabs"
 import Restaurant from "./Pages/Restaurant"
 import ProtectedRoute from "./Componets/ProtectedRoute"
 import Profile from "./Pages/Profile"
+import ManageUser from "./Pages/ManageUsers"
+import Payment from "./Pages/Payment"
+import MyBookings from "./Pages/MyBookings"
 
 
 function App() {
@@ -34,6 +37,9 @@ function App() {
             <Route path="/restaurants" element={<Restaurant />} />
             <Route path="/cabs" element={<Cabs />} />
             <Route path="/profile" element={<ProtectedRoute> <Profile /> </ProtectedRoute>} />
+            <Route path="/manageusers" element={<ProtectedRoute> <ManageUser /> </ProtectedRoute>} />
+            <Route path="/payment" element={<Payment />} />
+            <Route path="/history" element={<MyBookings />} />
           </Routes>
         </main>
         <Footer />

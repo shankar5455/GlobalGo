@@ -1,125 +1,125 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import { hotels } from "../data/hotels"
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Hotels = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [allHotels, setAllHotels] = useState([])
-  const [filteredHotels, setFilteredHotels] = useState([])
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [allHotels, setAllHotels] = useState([]);
+  const [filteredHotels, setFilteredHotels] = useState([]);
   const [searchParams, setSearchParams] = useState({
     location: "",
     checkInDate: "",
     checkOutDate: "",
     guests: 1,
-  })
+  });
   const [filters, setFilters] = useState({
     priceRange: [0, 100000],
     rating: 0,
     amenities: [],
-  })
-  const [sortBy, setSortBy] = useState("recommended")
-  const [loading, setLoading] = useState(true)
+  });
+  const [sortBy, setSortBy] = useState("recommended");
+  const [loading, setLoading] = useState(true);
 
-  // Extract query parameters
+  // Fetch all hotels from backend
   useEffect(() => {
-    const params = new URLSearchParams(location.search)
-    const destination = params.get("destination") || ""
-    const fromDate = params.get("fromDate") || ""
-    const toDate = params.get("toDate") || ""
-    const travelers = params.get("travelers") || 1
+    const params = new URLSearchParams(location.search);
+    const destination = params.get("destination") || "";
+    const fromDate = params.get("fromDate") || "";
+    const toDate = params.get("toDate") || "";
+    const travelers = params.get("travelers") || 1;
 
     setSearchParams({
       location: destination,
       checkInDate: fromDate,
       checkOutDate: toDate,
       guests: Number(travelers),
-    })
+    });
 
-    // Simulate API call delay
-    setTimeout(() => {
-      setAllHotels(hotels)
-      setFilteredHotels(hotels)
-      setLoading(false)
-    }, 1000)
-  }, [location.search])
+    axios.get('http://localhost:8080/api/hotels')
+      .then(response => {
+        setAllHotels(response.data);
+        setFilteredHotels(response.data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error('Error fetching hotels:', error);
+        setLoading(false);
+      });
+  }, [location.search]);
 
   // Apply filters and sorting
   useEffect(() => {
-    let results = [...allHotels]
+    let results = [...allHotels];
 
     // Filter by location if provided
     if (searchParams.location) {
-      results = results.filter((hotel) => hotel.location.toLowerCase().includes(searchParams.location.toLowerCase()))
+      results = results.filter((hotel) => 
+        hotel.location.toLowerCase().includes(searchParams.location.toLowerCase())
+      );
     }
 
     // Filter by price range
-    results = results.filter((hotel) => hotel.price >= filters.priceRange[0] && hotel.price <= filters.priceRange[1])
+    results = results.filter((hotel) => 
+      hotel.price >= filters.priceRange[0] && hotel.price <= filters.priceRange[1]
+    );
 
     // Filter by rating
     if (filters.rating > 0) {
-      results = results.filter((hotel) => hotel.rating >= filters.rating)
+      results = results.filter((hotel) => hotel.rating >= filters.rating);
     }
 
     // Filter by amenities
     if (filters.amenities.length > 0) {
-      results = results.filter((hotel) => filters.amenities.every((amenity) => hotel.amenities.includes(amenity)))
+      results = results.filter((hotel) => 
+        filters.amenities.every((amenity) => hotel.amenities.includes(amenity))
+      );
     }
 
     // Apply sorting
     if (sortBy === "price-low") {
-      results.sort((a, b) => a.price - b.price)
+      results.sort((a, b) => a.price - b.price);
     } else if (sortBy === "price-high") {
-      results.sort((a, b) => b.price - a.price)
+      results.sort((a, b) => b.price - a.price);
     } else if (sortBy === "rating") {
-      results.sort((a, b) => b.rating - a.rating)
+      results.sort((a, b) => b.rating - a.rating);
     }
 
-    setFilteredHotels(results)
-  }, [allHotels, searchParams, filters, sortBy])
+    setFilteredHotels(results);
+  }, [allHotels, searchParams, filters, sortBy]);
 
   // Handle filter changes
   const handleFilterChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value, type, checked } = e.target;
 
     if (type === "checkbox") {
       setFilters((prev) => {
-        const amenities = [...prev.amenities]
-
-        if (checked) {
-          amenities.push(value)
-        } else {
-          const index = amenities.indexOf(value)
-          if (index > -1) {
-            amenities.splice(index, 1)
-          }
-        }
-
-        return { ...prev, amenities }
-      })
+        const amenities = [...prev.amenities];
+        if (checked) amenities.push(value);
+        else amenities.splice(amenities.indexOf(value), 1);
+        return { ...prev, amenities };
+      });
     } else if (name === "minPrice" || name === "maxPrice") {
-      const index = name === "minPrice" ? 0 : 1
-      const newRange = [...filters.priceRange]
-      newRange[index] = Number(value)
-      setFilters((prev) => ({ ...prev, priceRange: newRange }))
+      const index = name === "minPrice" ? 0 : 1;
+      const newRange = [...filters.priceRange];
+      newRange[index] = Number(value);
+      setFilters((prev) => ({ ...prev, priceRange: newRange }));
     } else {
-      setFilters((prev) => ({ ...prev, [name]: Number(value) }))
+      setFilters((prev) => ({ ...prev, [name]: Number(value) }));
     }
-  }
+  };
 
   // Handle booking
   const handleBookHotel = (hotelId) => {
     if (localStorage.getItem("isLoggedIn") === "true") {
-      navigate(`/payment?type=hotel&id=${hotelId}`)
+      navigate(`/payment?type=hotel&id=${hotelId}`);
     } else {
-      navigate("/login")
+      navigate("/login");
     }
-  }
+  };
 
   // Get all possible amenities for filter
-  const allAmenities = [...new Set(allHotels.flatMap((hotel) => hotel.amenities))]
+  const allAmenities = [...new Set(allHotels.flatMap((hotel) => hotel.amenities))];
 
   return (
     <div className="page-container">
@@ -293,7 +293,8 @@ const Hotels = () => {
                           </div>
                         </div>
 
-                        <p>{hotel.location}</p>
+                        <p><strong>Location:</strong> {hotel.location}</p>
+                        <p><strong>Address:</strong> {hotel.address}</p>
                         <p>{hotel.description}</p>
 
                         <div className="flex justify-between align-center" style={{ marginTop: "10px" }}>
@@ -326,8 +327,7 @@ const Hotels = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Hotels
-
+export default Hotels;

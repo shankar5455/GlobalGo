@@ -1,0 +1,186 @@
+/* Responsive User Management Styles */
+.mu-container {
+  padding: 1rem;
+  background-color: #eaf4ff;
+  min-height: 100vh;
+}
+
+.mu-content {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.mu-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.mu-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #103f7e;
+  margin-bottom: 0.25rem;
+}
+
+.mu-subtitle {
+  color: #5b7dab;
+  font-size: 0.875rem;
+}
+
+.mu-user-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.mu-user-card {
+  background-color: #ffffff;
+  border: 1px solid #cce0fa;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(16, 63, 126, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mu-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mu-avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: #d0e4ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #0a2f5c;
+}
+
+.mu-username {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #103f7e;
+}
+
+.mu-email {
+  font-size: 0.8125rem;
+  color: #5b7dab;
+}
+
+.mu-details {
+  font-size: 0.8125rem;
+  color: #2c4b73;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mu-label {
+  font-weight: 600;
+  color: #103f7e;
+  font-size: 0.8125rem;
+}
+
+.mu-role-admin,
+.mu-role-user {
+  padding: 0.15rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.6875rem;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.mu-role-admin {
+  background-color: #d6ccff;
+  color: #5b28d1;
+}
+
+.mu-role-user {
+  background-color: #cce4ff;
+  color: #0a3a8a;
+}
+
+.mu-notify-on,
+.mu-notify-off {
+  font-size: 0.8125rem;
+}
+
+.mu-notify-on {
+  color: #15803d;
+}
+
+.mu-notify-off {
+  color: #64748b;
+}
+
+.mu-actions {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+.mu-delete-btn {
+  color: #c53030;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .mu-container {
+    padding: 0.75rem;
+  }
+  
+  .mu-title {
+    font-size: 1.25rem;
+  }
+  
+  .mu-user-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mu-user-card {
+    padding: 0.75rem;
+  }
+  
+  .mu-avatar {
+    height: 2rem;
+    width: 2rem;
+    font-size: 0.875rem;
+  }
+  
+  .mu-username {
+    font-size: 0.9375rem;
+  }
+  
+  .mu-email {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mu-header {
+    margin-bottom: 1rem;
+  }
+  
+  .mu-user-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .mu-actions {
+    text-align: left;
+  }
+}

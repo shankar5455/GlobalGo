@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { restaurants } from "../data/restaurants"
+import axios from "axios"
 
 const Restaurant = () => {
   const location = useLocation()
@@ -26,8 +26,20 @@ const Restaurant = () => {
     restaurant: null,
   })
 
-  // Extract query parameters
+  // Fetch restaurants from backend API
   useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/restaurants/all')
+        setAllRestaurants(response.data)
+        setFilteredRestaurants(response.data)
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching restaurant data:", error)
+        setLoading(false)
+      }
+    }
+
     const params = new URLSearchParams(location.search)
     const destination = params.get("destination") || ""
     const fromDate = params.get("fromDate") || ""
@@ -40,12 +52,7 @@ const Restaurant = () => {
       people: Number(travelersParam),
     })
 
-    // Simulate API call delay
-    setTimeout(() => {
-      setAllRestaurants(restaurants)
-      setFilteredRestaurants(restaurants)
-      setLoading(false)
-    }, 1000)
+    fetchRestaurants()
   }, [location.search])
 
   // Apply filters
@@ -280,7 +287,7 @@ const Restaurant = () => {
                           <strong>Hours:</strong> {restaurant.openingHours}
                         </div>
                         <div>
-                          <strong>Popular Dishes:</strong> {restaurant.popularDishes.join(", ")}
+                          <strong>Popular Dishes:</strong> {restaurant.popularDishes}
                         </div>
                       </div>
 
@@ -373,4 +380,3 @@ const Restaurant = () => {
 }
 
 export default Restaurant
-
