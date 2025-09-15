@@ -1,0 +1,165 @@
+/* General Reset & Base Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F9FAFB;
+    color: #333;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Container Utility */
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem 1rem;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .search-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  /* Section Styling */
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-title h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+  
+  /* Card Component */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-6px);
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #1E90FF;
+  }
+  
+  .card-text {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+  
+  .stars {
+    font-size: 1.2rem;
+    color: #FFD700;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .btn-outline {
+    border: 2px solid #1E90FF;
+    color: #1E90FF;
+    background: transparent;
+  }
+  
+  .btn-outline:hover {
+    background-color: #1E90FF;
+    color: white;
+  }
+  
+  .btn-primary {
+    background-color: #00C897;
+    color: white;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #00b087;
+  }
+  
+  /* CTA Section */
+  .text-center {
+    text-align: center;
+  }
+  .reviewer {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .cta-text {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  
+  /* Responsive Tweaks */
+  @media (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+  
+    .section {
+      padding: 2.5rem 1rem;
+    }
+  
+    .card {
+      padding: 1.5rem;
+    }
+  }
+  
